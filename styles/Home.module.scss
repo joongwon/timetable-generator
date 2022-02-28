@@ -9,4 +9,15 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+
+  footer {
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    color: white;
+  }
 }

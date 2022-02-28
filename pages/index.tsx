@@ -22,6 +22,9 @@ const Home: NextPage = () => {
           timeBegin={9}
           timeEnd={21}
         />
+        <footer>
+          <a href={"https://github.com/joongwon/timetable-generator"}>github</a>
+        </footer>
       </div>
     </>
   );
