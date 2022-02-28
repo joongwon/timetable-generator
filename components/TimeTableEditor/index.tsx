@@ -24,7 +24,7 @@ const DAYS = "월화수목금".split("");
 const makeTimes = (begin: number, end: number) => {
   let result = [];
   begin = Math.floor(begin);
-  end = Math.ceil(end);
+  end = Math.floor(end) + 1;
   for (let i = begin; i < end; ++i) result.push(i);
   return result;
 };
