@@ -1,38 +1,32 @@
 import { NextPage } from "next";
 import styles from "../styles/Home.module.scss";
+import TimeTableEditor from "../components/TimeTableEditor";
+import { TimeTable } from "../types/TimeTable";
 import { useState } from "react";
-import { Lecture } from "../types";
-import LectureList from "../components/LectureList";
-import TimeTable from "../components/TimeTable";
+import Head from "next/head";
 
 const Home: NextPage = () => {
-  const [lectures, setLectures] = useState<Lecture[]>([]);
-  const [editedLectureId, setEditedLectureId] = useState<string | null>(null);
+  const [tt, setTt] = useState<TimeTable>({
+    lectures: [],
+    slots: [],
+  });
   return (
-    <div className={styles.columnsContainer}>
-      <LectureList
-        lectures={lectures}
-        setLectures={setLectures}
-        editedLectureId={editedLectureId}
-        setEditedLectureId={setEditedLectureId}
-      />
-      <TimeTable
-        lectures={lectures}
-        modifiedId={editedLectureId}
-        setTimes={(value) =>
-          setLectures(
-            lectures.map((lecture) =>
-              lecture.id === editedLectureId
-                ? { ...lecture, times: value }
-                : lecture
-            )
-          )
-        }
-        times={
-          lectures.find((lecture) => lecture.id === editedLectureId)?.times
-        }
-      />
-    </div>
+    <>
+      <Head>
+        <title>시간표 만들기</title>
+      </Head>
+      <div className={styles.columnsContainer}>
+        <TimeTableEditor
+          value={tt}
+          onChange={setTt}
+          timeBegin={9}
+          timeEnd={21}
+        />
+        <footer>
+          <a href={"https://github.com/joongwon/timetable-generator"}>github</a>
+        </footer>
+      </div>
+    </>
   );
 };
 
