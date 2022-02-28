@@ -1,0 +1,99 @@
+.grid {
+  background: white;
+  flex: 1;
+  display: grid;
+  max-width: 500px;
+  grid-template-columns: 6ch 1ch;
+  grid-auto-columns: 1fr;
+  grid-auto-rows: 1fr;
+  font-family: Kyobo, sans-serif;
+  box-sizing: border-box;
+  height: fit-content;
+
+  .rowHeader {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    grid-column: 1;
+    grid-row-end: span 2;
+  }
+
+  .colHeader {
+    grid-row: 1;
+    text-align: center;
+  }
+
+  .scale {
+    border-bottom: solid thin;
+    grid-column: 2;
+  }
+
+  .clickArea {
+    background: transparent;
+    border-width: 1px 0 0 0;
+    border-style: dashed;
+    border-color: lightgray;
+    z-index: 1;
+  }
+
+  .timeSlot {
+    z-index: 2;
+    border-radius: 10px;
+    position: relative;
+    flex: 1;
+    margin: 1px 0 0 1px;
+    textarea {
+      position: absolute;
+      resize: none;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      border: none;
+      font-family: inherit;
+      outline: none;
+    }
+    button {
+      visibility: hidden;
+      position: absolute;
+      margin: auto;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+    &:hover button {
+      visibility: visible;
+    }
+  }
+
+  .draggedArea {
+    background: aliceblue;
+  }
+
+  .slotContainer {
+    position: relative;
+    display: flex;
+    z-index: 2;
+  }
+}
+
+$dash-color: grey;
+$dash-length: 7px;
+$dash-width: 1px;
+$dash-period: 2s;
+
+.rotatingDash {
+  background-image: linear-gradient(90deg, $dash-color 50%, transparent 50%), linear-gradient(90deg, $dash-color 50%, transparent 50%), linear-gradient(0deg, $dash-color 50%, transparent 50%), linear-gradient(0deg, $dash-color 50%, transparent 50%);
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+  background-size: $dash-length $dash-width, $dash-length $dash-width, $dash-width $dash-length, $dash-width $dash-length;
+  background-position: left top, right bottom, left bottom, right top;
+  animation: border-dance $dash-period infinite linear;
+}
+
+@keyframes border-dance {
+  0% {
+    background-position: left top, right bottom, left bottom, right top;
+  }
+  100% {
+    background-position: left 15px top, right 15px bottom, left bottom 15px, right top 15px;
+  }
+}
